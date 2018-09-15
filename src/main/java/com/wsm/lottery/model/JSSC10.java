@@ -1,4 +1,4 @@
-package com.wsm.lottery.model;
+package main.java.com.wsm.lottery.model;
 
 import java.util.Date;
 import java.util.List;

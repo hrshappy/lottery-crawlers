@@ -1,4 +1,4 @@
-package com.wsm.lottery.BJPK10;
+package main.java.com.wsm.lottery.BJPK10;
 
 public class BJPK10 {
 

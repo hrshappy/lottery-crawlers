@@ -1,12 +1,11 @@
-package com.wsm.lottery.JSSC10;
+package main.java.com.wsm.lottery.JSSC10;
 
 import com.alibaba.fastjson.JSON;
-import com.wsm.lottery.model.JSSC10;
-import com.wsm.lottery.utils.DateUtils;
-import com.wsm.lottery.utils.HttpUtils;
+import main.java.com.wsm.lottery.model.JSSC10;
+import main.java.com.wsm.lottery.utils.DateUtils;
+import main.java.com.wsm.lottery.utils.HttpUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.*;

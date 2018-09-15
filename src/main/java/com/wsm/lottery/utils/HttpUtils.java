@@ -1,4 +1,4 @@
-package com.wsm.lottery.utils;
+package main.java.com.wsm.lottery.utils;
 
 import com.sun.deploy.net.HttpResponse;
 
