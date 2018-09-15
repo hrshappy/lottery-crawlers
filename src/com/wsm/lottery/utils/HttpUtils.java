@@ -1,5 +1,7 @@
 package com.wsm.lottery.utils;
 
+import com.sun.deploy.net.HttpResponse;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -320,4 +322,15 @@ public class HttpUtils {
         }
         return out.toString();
     }
+
+    public static String getSessionId(String url) throws IOException{
+        // connection
+        URL u = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        Map map = conn.getHeaderFields();
+
+        System.out.print(map.get("Set-Cookie"));
+        return "";
+    }
+
 }
