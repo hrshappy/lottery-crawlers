@@ -6,7 +6,9 @@ package com.wsm.lottery.dao;
 import com.wsm.lottery.config.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 访问接口默认实现
@@ -16,10 +18,13 @@ import java.util.List;
 public class LotteryJsscDAOImpl extends BaseLotteryJsscDAOImpl {
 
     private static final String namespace = "com.wsm.lottery.dao.LotteryJsscDAO.";
+    private static SqlSession session = MyBatisUtil.getSession();
 
     @Override
     public Long insert(LotteryJsscDO lotteryJsscDO) {
-        return null;
+        int sysoNo = session.insert(namespace+"insert", lotteryJsscDO);
+        session.commit();
+        return Long.valueOf(sysoNo);
     }
 
     @Override
@@ -45,15 +50,17 @@ public class LotteryJsscDAOImpl extends BaseLotteryJsscDAOImpl {
     @Override
     public List<LotteryJsscDO> selectListByEO(LotteryJsscDO lotteryJsscDO) {
         List<LotteryJsscDO> lotteryJsscDOS = null;
-        SqlSession session = MyBatisUtil.getSession();
+        lotteryJsscDO.setCreateTime(null);
+        Map param = new HashMap();
+        param.put("period", lotteryJsscDO.getPeriod());
         try {
-            lotteryJsscDOS = session.selectList(namespace + "selectEOByEO", LotteryJsscDO.class);
+            lotteryJsscDOS = session.selectList(namespace + "selectEOByEO", param);
             //注意：此处有陷阱，如果做了更新、插入或删除操作，必须使用：
             //session.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
-            MyBatisUtil.closeSession(session);
+
         }
         return lotteryJsscDOS;
     }

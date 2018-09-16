@@ -1,6 +1,9 @@
-package main.java.com.wsm.lottery.JSSC10;
+package com.wsm.lottery.JSSC10;
 
 import com.alibaba.fastjson.JSON;
+import com.wsm.lottery.base.BaseDAO;
+import com.wsm.lottery.dao.LotteryJsscDAOImpl;
+import com.wsm.lottery.dao.LotteryJsscDO;
 import main.java.com.wsm.lottery.model.JSSC10;
 import main.java.com.wsm.lottery.utils.DateUtils;
 import main.java.com.wsm.lottery.utils.HttpUtils;
@@ -14,8 +17,31 @@ public class JSSC10Crawler {
 
     private static final String JSSC10Url = "http://666662cp.com/";
 
+    private static final BaseDAO lotteryDao = new LotteryJsscDAOImpl();
+
     public static void main(String[] args) throws Exception{
 
+        String today = DateUtils.getCurrentDate();
+
+        System.out.println(today);
+
+        Date date = new Date();
+        int i=1;
+        while(i<=2){
+            Date newDate = DateUtils.addDay(date,-i);
+            i++;
+            String todayNew = DateUtils.dateToString(newDate);
+            spiderDataIntoDB(todayNew);
+        }
+
+
+
+
+
+    }
+
+
+    public static void spiderDataIntoDB(String today) throws Exception{
         //1、获取sessionID
         String cashUrl = JSSC10Url + "/cashlogin";
         Map param = new HashMap();
@@ -36,9 +62,7 @@ public class JSSC10Crawler {
         Map headMap = new HashMap();
         headMap.put("Cookie","87c1bf6e271f"+sessionId.substring(sessionId.indexOf("=")));
         String jsUrl = JSSC10Url + "member/dresult?lottery=PK10JSC&date=";
-        String today = DateUtils.getCurrentDate();
 
-        System.out.println(today);
         String resHtml = HttpUtils.get(jsUrl+today,headMap);
 
         Document resultDocument = Jsoup.parse(resHtml);
@@ -96,7 +120,37 @@ public class JSSC10Crawler {
         System.out.println(jssc10List);
 
 
+        //插入DB
 
+        for(JSSC10 jssc10 : jssc10List){
+            LotteryJsscDO lotteryJsscDO = new LotteryJsscDO();
+
+            lotteryJsscDO.setCreatePin("siming.wang");
+            lotteryJsscDO.setCreateTime(new Date());
+            lotteryJsscDO.setPeriod(jssc10.getPeriod());
+            lotteryJsscDO.setDrawTime(jssc10.getDrawTime());
+
+            List<Integer> ballNames = jssc10.getBallNames();
+            lotteryJsscDO.setBallOne(ballNames.get(0));
+            lotteryJsscDO.setBallTwo(ballNames.get(1));
+            lotteryJsscDO.setBallThree(ballNames.get(2));
+            lotteryJsscDO.setBallFour(ballNames.get(3));
+            lotteryJsscDO.setBallFive(ballNames.get(4));
+            lotteryJsscDO.setBallSix(ballNames.get(5));
+            lotteryJsscDO.setBallSeven(ballNames.get(6));
+            lotteryJsscDO.setBallEight(ballNames.get(7));
+            lotteryJsscDO.setBallNine(ballNames.get(8));
+            lotteryJsscDO.setBallTen(ballNames.get(9));
+            lotteryJsscDO.setYn("Y");
+
+            List<LotteryJsscDO> lotteryJsscDOS = lotteryDao.selectListByEO(lotteryJsscDO);
+
+            if(lotteryDao.selectListByEO(lotteryJsscDO).isEmpty()){
+                lotteryDao.insert(lotteryJsscDO);
+            }
+
+
+        }
     }
 
 

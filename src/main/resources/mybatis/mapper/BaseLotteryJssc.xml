@@ -237,6 +237,8 @@
 	<select id="selectEOByEO" parameterType="java.util.Map" resultMap="result">
 		<include refid="select_all_column" />
 		from lottery_jssc
+        where Yn = 'Y'
+        <if test="period != null and period != ''"> and period=#{period} </if>
 	</select>
 	
 	<sql id="select_all_column">
