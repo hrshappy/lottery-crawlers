@@ -19,8 +19,10 @@ public class JSSC10Analysize {
     public static void main(String[] args){
         Map paramDb = new HashMap();
 
-        Date today = new Date();
-        Date yestoday = DateUtils.addDay(today,-1);
+        Date nowDay = new Date();
+        int i = 0;
+        Date today = DateUtils.addDay(nowDay,-i);
+        Date yestoday = DateUtils.addDay(nowDay,-(i+1));
 
         drawTimeFrom = DateUtils.dateToString(yestoday) + drawTimeFrom;
         drawTimeTo = DateUtils.dateToString(today) + drawTimeTo;

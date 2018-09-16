@@ -240,7 +240,7 @@
         where Yn = 'Y'
         <if test="period != null and period != ''"> and period=#{period} </if>
         <if test="drawTimeFrom != null and drawTimeFrom != ''"> and draw_time>=#{drawTimeFrom} </if>
-        <if test="drawTimeTo != null and drawTimeTo != ''"> and draw_time &lt;#{drawTimeTo} </if>
+        <if test="drawTimeTo != null and drawTimeTo != ''"> and draw_time &lt;=#{drawTimeTo} </if>
 	</select>
 	
 	<sql id="select_all_column">

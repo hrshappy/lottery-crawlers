@@ -27,7 +27,7 @@ public class JSSC10Crawler {
 
         Date date = new Date();
         int i=1;
-        while(i<=2){
+        while(i<=1){
             Date newDate = DateUtils.addDay(date,-i);
             i++;
             String todayNew = DateUtils.dateToString(newDate);
@@ -94,7 +94,7 @@ public class JSSC10Crawler {
             jssc10.setPeriod(period.text());
 
             String time = drawTime.text();
-            time = "2018-" + time.substring(0,5) + time.substring(7);
+            time = "2018-" + time.substring(0,5) + " "+ time.substring(time.length()-8);
 
             jssc10.setDrawTime(DateUtils.stringToDate(time,DateUtils.DATE_TIME_FORMAT));
             List<Integer> ballNames = new ArrayList<>();
@@ -145,8 +145,9 @@ public class JSSC10Crawler {
 
             Map paramDb = new HashMap();
             paramDb.put("period",lotteryJsscDO.getPeriod());
+            List<LotteryJsscDO> lotteryJsscDOS = lotteryDao.selectListByMap(paramDb);
 
-            if(lotteryDao.selectListByMap(param).isEmpty()){
+            if(lotteryDao.selectListByMap(paramDb).isEmpty()){
                 lotteryDao.insert(lotteryJsscDO);
             }
 
