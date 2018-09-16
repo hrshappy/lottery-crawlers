@@ -1,4 +1,4 @@
-package main.java.com.wsm.lottery.utils;
+package com.wsm.lottery.utils;
 
 
 import java.text.ParseException;

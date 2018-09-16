@@ -1,12 +1,12 @@
 package com.wsm.lottery.JSSC10;
 
 import com.alibaba.fastjson.JSON;
-import com.wsm.lottery.base.BaseDAO;
+import com.wsm.lottery.dao.LotteryJsscDAO;
 import com.wsm.lottery.dao.LotteryJsscDAOImpl;
 import com.wsm.lottery.dao.LotteryJsscDO;
+import com.wsm.lottery.utils.DateUtils;
+import com.wsm.lottery.utils.HttpUtils;
 import main.java.com.wsm.lottery.model.JSSC10;
-import main.java.com.wsm.lottery.utils.DateUtils;
-import main.java.com.wsm.lottery.utils.HttpUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -17,7 +17,7 @@ public class JSSC10Crawler {
 
     private static final String JSSC10Url = "http://666662cp.com/";
 
-    private static final BaseDAO lotteryDao = new LotteryJsscDAOImpl();
+    private static final LotteryJsscDAO lotteryDao = new LotteryJsscDAOImpl();
 
     public static void main(String[] args) throws Exception{
 
@@ -143,9 +143,10 @@ public class JSSC10Crawler {
             lotteryJsscDO.setBallTen(ballNames.get(9));
             lotteryJsscDO.setYn("Y");
 
-            List<LotteryJsscDO> lotteryJsscDOS = lotteryDao.selectListByEO(lotteryJsscDO);
+            Map paramDb = new HashMap();
+            paramDb.put("period",lotteryJsscDO.getPeriod());
 
-            if(lotteryDao.selectListByEO(lotteryJsscDO).isEmpty()){
+            if(lotteryDao.selectListByMap(param).isEmpty()){
                 lotteryDao.insert(lotteryJsscDO);
             }
 

@@ -49,12 +49,14 @@ public class LotteryJsscDAOImpl extends BaseLotteryJsscDAOImpl {
 
     @Override
     public List<LotteryJsscDO> selectListByEO(LotteryJsscDO lotteryJsscDO) {
+        return null;
+    }
+
+    @Override
+    public List<LotteryJsscDO> selectListByMap(Map param) {
         List<LotteryJsscDO> lotteryJsscDOS = null;
-        lotteryJsscDO.setCreateTime(null);
-        Map param = new HashMap();
-        param.put("period", lotteryJsscDO.getPeriod());
         try {
-            lotteryJsscDOS = session.selectList(namespace + "selectEOByEO", param);
+            lotteryJsscDOS = session.selectList(namespace + "selectListByMap", param);
             //注意：此处有陷阱，如果做了更新、插入或删除操作，必须使用：
             //session.commit();
         } catch (Exception e) {
