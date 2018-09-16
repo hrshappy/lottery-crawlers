@@ -4,6 +4,7 @@ import com.wsm.lottery.dao.LotteryJsscDAO;
 import com.wsm.lottery.dao.LotteryJsscDAOImpl;
 import com.wsm.lottery.dao.LotteryJsscDO;
 import com.wsm.lottery.utils.DateUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +16,8 @@ public class JSSC10Analysize {
     private static final LotteryJsscDAO lotteryDao = new LotteryJsscDAOImpl();
     private static String drawTimeFrom = " 07:00:30";
     private static String drawTimeTo = " 05:59:15";
+
+    private static Logger logger = Logger.getLogger(JSSC10Analysize.class);
 
     public static void main(String[] args){
         Map paramDb = new HashMap();
@@ -34,7 +37,6 @@ public class JSSC10Analysize {
 
         List<LotteryJsscDO> lotteryJsscDOS = lotteryDao.selectListByMap(paramDb);
 
-        System.out.println(lotteryJsscDOS);
 
 
     }
