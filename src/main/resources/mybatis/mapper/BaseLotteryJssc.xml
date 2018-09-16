@@ -241,6 +241,7 @@
         <if test="period != null and period != ''"> and period=#{period} </if>
         <if test="drawTimeFrom != null and drawTimeFrom != ''"> and draw_time>=#{drawTimeFrom} </if>
         <if test="drawTimeTo != null and drawTimeTo != ''"> and draw_time &lt;=#{drawTimeTo} </if>
+        order by draw_time asc
 	</select>
 	
 	<sql id="select_all_column">

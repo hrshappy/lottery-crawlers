@@ -6,7 +6,7 @@ import com.wsm.lottery.dao.LotteryJsscDAOImpl;
 import com.wsm.lottery.dao.LotteryJsscDO;
 import com.wsm.lottery.utils.DateUtils;
 import com.wsm.lottery.utils.HttpUtils;
-import main.java.com.wsm.lottery.model.JSSC10;
+import com.wsm.lottery.model.JSSC10;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -26,10 +26,10 @@ public class JSSC10Crawler {
         System.out.println(today);
 
         Date date = new Date();
-        int i=1;
-        while(i<=1){
+        int i=5;
+        while(i>3){
             Date newDate = DateUtils.addDay(date,-i);
-            i++;
+            i--;
             String todayNew = DateUtils.dateToString(newDate);
             spiderDataIntoDB(todayNew);
         }
