@@ -26,8 +26,8 @@ public class JSSC10Crawler {
         System.out.println(today);
 
         Date date = new Date();
-        int i=5;
-        while(i>3){
+        int i=20;
+        while(i>5){
             Date newDate = DateUtils.addDay(date,-i);
             i--;
             String todayNew = DateUtils.dateToString(newDate);

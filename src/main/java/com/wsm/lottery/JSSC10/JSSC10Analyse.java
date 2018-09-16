@@ -96,17 +96,17 @@ public class JSSC10Analyse {
         Map<Integer, Integer> two = analyseTwo(datas);
         Map<Integer, Integer> three = analyseThree(datas);
 
-        System.out.println("分析1，出现对子，就买13568 10");
+        System.out.println("分析1，出现对子，就买13568 10 :");
         for(Map.Entry<Integer,Integer> entry : one.entrySet()){
             System.out.println(entry.getKey() + "期购买中奖次数：" + entry.getValue());
         }
 
-        System.out.println("分析2，出现对子12359，就买68 10");
+        System.out.println("分析2，出现对子12359，就买68 10 :");
         for(Map.Entry<Integer,Integer> entry : two.entrySet()){
             System.out.println(entry.getKey() + "期购买中奖次数：" + entry.getValue());
         }
 
-        System.out.println("分析3，出现对子46780，就买135");
+        System.out.println("分析3，出现对子46780，就买135 :");
         for(Map.Entry<Integer,Integer> entry : three.entrySet()){
             System.out.println(entry.getKey() + "期购买中奖次数：" + entry.getValue());
         }
@@ -115,6 +115,7 @@ public class JSSC10Analyse {
         //分析结束
 
         System.out.println("---------------"+DateUtils.dateToString(yestoday)+" 数据分析结束！");
+        System.out.println("*");
 
     }
 
@@ -126,7 +127,7 @@ public class JSSC10Analyse {
 
         boolean findFlag = false;
         int cishu = 0;
-        for(int i=0; i<datas.size()-1; i++){
+        for(int i=0; i<datas.size()-2; i++){
             for (int j=0; j<10; j++){
                 if(findFlag){
                     cishu ++;
@@ -167,7 +168,7 @@ public class JSSC10Analyse {
 
         boolean findFlag = false;
         int cishu = 0;
-        for(int i=0; i<datas.size()-1; i++){
+        for(int i=0; i<datas.size()-2; i++){
             for (int j=0; j<10; j++){
                 if(findFlag){
                     cishu ++;
@@ -214,7 +215,7 @@ public class JSSC10Analyse {
 
         boolean findFlag = false;
         int cishu = 0;
-        for(int i=0; i<datas.size()-1; i++){
+        for(int i=0; i<datas.size()-3; i++){
             for (int j=0; j<10; j++){
                 if(findFlag){
                     cishu ++;
