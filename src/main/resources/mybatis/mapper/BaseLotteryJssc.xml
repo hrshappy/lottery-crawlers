@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsm.lottery.dao.LotteryJsscDAO">
+	<resultMap id="result" type="com.wsm.lottery.dao.LotteryJsscDO">
+		<id property="sysNo" column="sys_no" />
+		<result property="period" column="period" />
+		<result property="drawTime" column="draw_time" />
+		<result property="ballOne" column="ball_one" />
+		<result property="ballTwo" column="ball_two" />
+		<result property="ballThree" column="ball_three" />
+		<result property="ballFour" column="ball_four" />
+		<result property="ballFive" column="ball_five" />
+		<result property="ballSix" column="ball_six" />
+		<result property="ballSeven" column="ball_seven" />
+		<result property="ballEight" column="ball_eight" />
+		<result property="ballNine" column="ball_nine" />
+		<result property="ballTen" column="ball_ten" />
+		<result property="createTime" column="create_time" />
+		<result property="createPin" column="create_pin" />
+		<result property="yn" column="Yn" />
+	</resultMap>
+	
+	<sql id="insert_columns">
+            <if test="period != null">period</if>
+            <if test="drawTime != null">draw_time</if>
+            <if test="ballOne != null">ball_one</if>
+            <if test="ballTwo != null">ball_two</if>
+            <if test="ballThree != null">ball_three</if>
+            <if test="ballFour != null">ball_four</if>
+            <if test="ballFive != null">ball_five</if>
+            <if test="ballSix != null">ball_six</if>
+            <if test="ballSeven != null">ball_seven</if>
+            <if test="ballEight != null">ball_eight</if>
+            <if test="ballNine != null">ball_nine</if>
+            <if test="ballTen != null">ball_ten</if>
+            <if test="createTime != null">create_time</if>
+            <if test="createPin != null">create_pin</if>
+            <if test="yn != null">Yn</if>
+	</sql>
+	
+	<sql id="insert_all_columns">
+			period
+            ,draw_time
+            ,ball_one
+            ,ball_two
+            ,ball_three
+            ,ball_four
+            ,ball_five
+            ,ball_six
+            ,ball_seven
+            ,ball_eight
+            ,ball_nine
+            ,ball_ten
+            ,create_time
+            ,create_pin
+            ,Yn
+	</sql>
+
+	<sql id="insert_values">
+          <if test="period != null">#{period}</if>
+          <if test="drawTime != null">#{drawTime}</if>
+          <if test="ballOne != null">#{ballOne}</if>
+          <if test="ballTwo != null">#{ballTwo}</if>
+          <if test="ballThree != null">#{ballThree}</if>
+          <if test="ballFour != null">#{ballFour}</if>
+          <if test="ballFive != null">#{ballFive}</if>
+          <if test="ballSix != null">#{ballSix}</if>
+          <if test="ballSeven != null">#{ballSeven}</if>
+          <if test="ballEight != null">#{ballEight}</if>
+          <if test="ballNine != null">#{ballNine}</if>
+          <if test="ballTen != null">#{ballTen}</if>
+          <if test="createTime != null">#{createTime}</if>
+          <if test="createPin != null">#{createPin}</if>
+          <if test="yn != null">#{yn}</if>
+	</sql>
+
+    <sql id="batch_insert_values">
+            #{item.period}
+            ,#{item.drawTime}
+            ,#{item.ballOne}
+            ,#{item.ballTwo}
+            ,#{item.ballThree}
+            ,#{item.ballFour}
+            ,#{item.ballFive}
+            ,#{item.ballSix}
+            ,#{item.ballSeven}
+            ,#{item.ballEight}
+            ,#{item.ballNine}
+            ,#{item.ballTen}
+            ,#{item.createTime}
+            ,#{item.createPin}
+            ,#{item.yn}
+    </sql>
+    
+    <sql id="insert_all_values">
+            #{period}
+            ,#{drawTime}
+            ,#{ballOne}
+            ,#{ballTwo}
+            ,#{ballThree}
+            ,#{ballFour}
+            ,#{ballFive}
+            ,#{ballSix}
+            ,#{ballSeven}
+            ,#{ballEight}
+            ,#{ballNine}
+            ,#{ballTen}
+            ,#{createTime}
+            ,#{createPin}
+            ,#{yn}
+    </sql>
+	
+	<insert id="insertHasId" parameterType="com.wsm.lottery.dao.LotteryJsscDO" useGeneratedKeys="false">
+		insert into lottery_jssc(
+			sys_no,
+			<include refid="insert_columns" />
+		)values(
+			#{sysNo},
+			<include refid="insert_values" />
+		)
+	</insert>
+	
+	<insert id="batchInsertHasId"  parameterType="java.util.List" useGeneratedKeys="false">
+		insert into lottery_jssc(
+			sys_no,
+			<include refid="insert_all_columns" />
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+		    #{item.sysNo},
+            <include refid="batch_insert_values" />
+		)
+		</foreach>
+	</insert>
+
+	<insert id="insert" parameterType="com.wsm.lottery.dao.LotteryJsscDO"  useGeneratedKeys="true" keyProperty="sysNo">
+		insert into lottery_jssc(
+			<include refid="insert_all_columns" />
+		)values(
+			<include refid="insert_all_values" />
+		)
+	</insert>
+
+	<insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true">
+		insert into lottery_jssc(
+			<include refid="insert_all_columns" />
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+            <include refid="batch_insert_values" />
+		)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="com.wsm.lottery.dao.LotteryJsscDO">
+        update lottery_jssc
+        <set>
+            <if test="period != null"> period=#{period}, </if>
+            <if test="drawTime != null"> draw_time=#{drawTime}, </if>
+            <if test="ballOne != null"> ball_one=#{ballOne}, </if>
+            <if test="ballTwo != null"> ball_two=#{ballTwo}, </if>
+            <if test="ballThree != null"> ball_three=#{ballThree}, </if>
+            <if test="ballFour != null"> ball_four=#{ballFour}, </if>
+            <if test="ballFive != null"> ball_five=#{ballFive}, </if>
+            <if test="ballSix != null"> ball_six=#{ballSix}, </if>
+            <if test="ballSeven != null"> ball_seven=#{ballSeven}, </if>
+            <if test="ballEight != null"> ball_eight=#{ballEight}, </if>
+            <if test="ballNine != null"> ball_nine=#{ballNine}, </if>
+            <if test="ballTen != null"> ball_ten=#{ballTen}, </if>
+            <if test="createTime != null"> create_time=#{createTime}, </if>
+            <if test="createPin != null"> create_pin=#{createPin}, </if>
+            <if test="yn != null"> Yn=#{yn}, </if>
+        </set>
+		where sys_no=#{sysNo}
+	</update>
+
+	<update id="updateByField" parameterType="java.util.HashMap">
+        update lottery_jssc
+        <set>
+            <if test="template.period != null"> period=#{template.period}, </if>
+            <if test="template.drawTime != null"> draw_time=#{template.drawTime}, </if>
+            <if test="template.ballOne != null"> ball_one=#{template.ballOne}, </if>
+            <if test="template.ballTwo != null"> ball_two=#{template.ballTwo}, </if>
+            <if test="template.ballThree != null"> ball_three=#{template.ballThree}, </if>
+            <if test="template.ballFour != null"> ball_four=#{template.ballFour}, </if>
+            <if test="template.ballFive != null"> ball_five=#{template.ballFive}, </if>
+            <if test="template.ballSix != null"> ball_six=#{template.ballSix}, </if>
+            <if test="template.ballSeven != null"> ball_seven=#{template.ballSeven}, </if>
+            <if test="template.ballEight != null"> ball_eight=#{template.ballEight}, </if>
+            <if test="template.ballNine != null"> ball_nine=#{template.ballNine}, </if>
+            <if test="template.ballTen != null"> ball_ten=#{template.ballTen}, </if>
+            <if test="template.createTime != null"> create_time=#{template.createTime}, </if>
+            <if test="template.createPin != null"> create_pin=#{template.createPin}, </if>
+            <if test="template.yn != null"> Yn=#{template.yn}, </if>
+        </set>
+		<where>
+            <if test="condition.sysNo != null"> and sys_no=#{condition.sysNo}</if>
+            <if test="condition.period != null"> and period=#{condition.period}</if>
+            <if test="condition.drawTime != null"> and draw_time=#{condition.drawTime}</if>
+            <if test="condition.ballOne != null"> and ball_one=#{condition.ballOne}</if>
+            <if test="condition.ballTwo != null"> and ball_two=#{condition.ballTwo}</if>
+            <if test="condition.ballThree != null"> and ball_three=#{condition.ballThree}</if>
+            <if test="condition.ballFour != null"> and ball_four=#{condition.ballFour}</if>
+            <if test="condition.ballFive != null"> and ball_five=#{condition.ballFive}</if>
+            <if test="condition.ballSix != null"> and ball_six=#{condition.ballSix}</if>
+            <if test="condition.ballSeven != null"> and ball_seven=#{condition.ballSeven}</if>
+            <if test="condition.ballEight != null"> and ball_eight=#{condition.ballEight}</if>
+            <if test="condition.ballNine != null"> and ball_nine=#{condition.ballNine}</if>
+            <if test="condition.ballTen != null"> and ball_ten=#{condition.ballTen}</if>
+            <if test="condition.createTime != null"> and create_time=#{condition.createTime}</if>
+            <if test="condition.createPin != null"> and create_pin=#{condition.createPin}</if>
+            <if test="condition.yn != null"> and Yn=#{condition.yn}</if>
+        </where>
+	</update>
+
+	<select id="select" parameterType="java.util.Map" resultMap="result">
+		<include refid="select_all_column" />
+		from lottery_jssc 
+		where sys_no=#{id}
+		<if test="isLock"> for update </if>
+	</select>
+
+	<select id="selectListByIdList" parameterType="java.util.Map" resultMap="result">
+		<include refid="select_all_column" />
+		from lottery_jssc
+		<where>
+			<if test="idList != null">
+			sys_no in
+			<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			</if>
+		</where>
+		<if test="isLock"> for update </if>
+	</select>
+
+	<select id="selectListByMap" parameterType="java.util.Map" resultMap="result">
+		<include refid="select_all_column" />
+		from lottery_jssc
+        where Yn = 'Y'
+        <if test="period != null and period != ''"> and period=#{period} </if>
+        <if test="drawTimeFrom != null and drawTimeFrom != ''"> and draw_time>=#{drawTimeFrom} </if>
+        <if test="drawTimeTo != null and drawTimeTo != ''"> and draw_time &lt;=#{drawTimeTo} </if>
+        order by draw_time asc
+	</select>
+	
+	<sql id="select_all_column">
+		select SYS_NO
+            ,period
+            ,draw_time
+            ,ball_one
+            ,ball_two
+            ,ball_three
+            ,ball_four
+            ,ball_five
+            ,ball_six
+            ,ball_seven
+            ,ball_eight
+            ,ball_nine
+            ,ball_ten
+            ,create_time
+            ,create_pin
+            ,Yn
+	</sql>
+
+	<sql id="where_all">
+		<where>
+            <include refid="condition_all" />
+		</where>
+	</sql>
+
+    <sql id="condition_all">
+        <if test="condition.sysNo != null"> and sys_no=#{condition.sysNo} </if>
+        <if test="condition.period != null and condition.period != ''"> and period=#{condition.period} </if>
+        <if test="condition.drawTime != null"> and draw_time=#{condition.drawTime} </if>
+        <if test="condition.ballOne != null"> and ball_one=#{condition.ballOne} </if>
+        <if test="condition.ballTwo != null"> and ball_two=#{condition.ballTwo} </if>
+        <if test="condition.ballThree != null"> and ball_three=#{condition.ballThree} </if>
+        <if test="condition.ballFour != null"> and ball_four=#{condition.ballFour} </if>
+        <if test="condition.ballFive != null"> and ball_five=#{condition.ballFive} </if>
+        <if test="condition.ballSix != null"> and ball_six=#{condition.ballSix} </if>
+        <if test="condition.ballSeven != null"> and ball_seven=#{condition.ballSeven} </if>
+        <if test="condition.ballEight != null"> and ball_eight=#{condition.ballEight} </if>
+        <if test="condition.ballNine != null"> and ball_nine=#{condition.ballNine} </if>
+        <if test="condition.ballTen != null"> and ball_ten=#{condition.ballTen} </if>
+        <if test="condition.createTime != null"> and create_time=#{condition.createTime} </if>
+        <if test="condition.createPin != null and condition.createPin != ''"> and create_pin=#{condition.createPin} </if>
+        <if test="condition.yn != null and condition.yn != ''"> and Yn=#{condition.yn} </if>
+    </sql>
+
+	<delete id="delete" parameterType="com.wsm.lottery.dao.LotteryJsscDO">
+		delete from lottery_jssc
+		where sys_no=#{sysNo}
+	</delete>
+
+</mapper>
